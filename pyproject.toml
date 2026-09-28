@@ -1,0 +1,49 @@
+[project]
+name = "uride-pricing"
+version = "0.0.0"
+description = "WeRide pricing / surge / ETA-ML service. FastAPI."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "fastapi>=0.115.0,<0.116",
+  "uvicorn[standard]>=0.32.0,<0.33",
+  "pydantic>=2.10.0,<3.0",
+  "pydantic-settings>=2.7.0,<3.0",
+  "structlog>=24.4.0,<25.0",
+  "httpx>=0.28.0,<0.29",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.3.0,<9.0",
+  "pytest-asyncio>=0.24.0,<0.25",
+  "ruff>=0.8.0,<0.9",
+  "mypy>=1.13.0,<2.0",
+  "httpx>=0.28.0,<0.29",
+]
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = [".venv", "build", "dist"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "N", "SIM", "RUF"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+warn_unused_ignores = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
